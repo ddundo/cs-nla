@@ -1,4 +1,4 @@
-function [A, F]=Poisson(N)
+function [A, F,G]=Poisson(N)
 M = N; % number of points
 % Define domain
 a = 0; b = 1;
@@ -22,5 +22,7 @@ A = hx^(-2)*(kron(B,I) + kron(I,B));
 % Generate 2D arrays of grids
 [X,Y] = meshgrid((a+hx):hx:(b-hx),(c+hy):hy:(d-hy));
 f = @(X,Y)13*pi^2*sin(2*pi*X).*sin(3*pi*Y);
+g = @(X,Y)(-(X-1).^3.*(42*X.^2-24*X+2).*Y.*(Y-1))-2*X.^2.*(X-1).^5;
 F=f(X(:), Y(:));
+G=g(X(:), Y(:));
 end
